@@ -227,7 +227,7 @@ end
 
 
 function strategies.wowhead.GetItemFromAuctionHouseClassic(data)
-    if not IsClassic() or (not data.focus.itemIndex and (not data.focus:GetParent() or not data.focus:GetParent().itemIndex)) then return end
+    if IsRetail() or (not data.focus.itemIndex and (not data.focus:GetParent() or not data.focus:GetParent().itemIndex)) then return end
     local index = data.focus.itemIndex or data.focus:GetParent().itemIndex
     local link = GetAuctionItemLink("list", index)
     local id, type = GetFromLink(link)
@@ -332,7 +332,7 @@ local function HookTooltip(tooltip)
     hooksecurefunc(tooltip, "SetHyperlink", function(tooltip, hyperlink)
             tooltipStates[tooltip].hyperlink = hyperlink
     end)
-    if not IsClassic() then
+    if IsRetail() then
         hooksecurefunc(tooltip, "SetRecipeReagentItem", function(tooltip, recipeId, reagentIndex)
                 tooltipStates[tooltip].hyperlink = C_TradeSkillUI.GetRecipeReagentItemLink(recipeId, reagentIndex)
         end)

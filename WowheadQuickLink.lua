@@ -1,7 +1,14 @@
 local addonName, nameSpace = ...
+
+-- default to retail links
 nameSpace.baseWowheadUrl = "https://%swowhead.com/%s=%s%s"
-if IsClassic() then
+if IsClassicEra() then
     nameSpace.baseWowheadUrl = "https://%sclassic.wowhead.com/%s=%s%s"
+elseif IsClassicBC() then
+	nameSpace.baseWowheadUrl = "https://%stbc.wowhead.com/%s=%s%s"
+elseif not IsRetail() then
+	-- unrecognized version.
+	print("WowheadQuickLink: VERSION ERROR. Falling back on main database.")
 end
 nameSpace.baseWowheadAzEsUrl = "https://%swowhead.com/azerite-essence/%s%s"
 nameSpace.baseArmoryUrl = "https://worldofwarcraft.com/%s/character/%s/%s"

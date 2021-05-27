@@ -47,10 +47,21 @@ function HandleDefaultBindings(binding_name, default_key)
 end
 
 
-function IsClassic()
-    return select(4, GetBuildInfo()) < 20000
+function IsClassicEra()
+    return WOW_PROJECT_ID == WOW_PROJECT_CLASSIC
 end
 
+function IsClassicBC()
+	return WOW_PROJECT_ID == WOW_PROJECT_BURNING_CRUSADE_CLASSIC
+end
+
+function IsRetail()
+	return WOW_PROJECT_ID == WOW_PROJECT_MAINLINE
+end
+
+function IsClassic()
+	return IsClassicEra() or IsClassicBC() 
+end
 
 local function Hide()
     WowheadQuickLinkConfig_Frame:Hide()
